@@ -1,33 +1,26 @@
 from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse, Http404
-from .models import User
 from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
+
 # Create your views here.
-def index(request):
+def login(request):
 	template = loader.get_template("login/login.html")
 	try:
-		username = request.POST['username']
-		password = request.POST['password']
+		username_field = request.POST['username']
+		password_field = request.POST['password']
 
-		if username == "" or password == "":
-				message = "You need to fill username and password"
-				return HttpResponse(template.render({'message': message}, request))
-		user_list = User.objects.all()
-
-		for u in user_list:
-			if username == u.username and password == u.password:
-				message = "Successful"
-				return HttpResponse(template.render({
-					'message': message
-				}, request))
-			else:
-				message = "Fail"
-				return HttpResponse(template.render({
-					'message': message
-				}, request))
+		user_auth = authenticate(username = username_field, password = password_field)
+		if user_auth is not None:
+			return HttpResponse("success")
+		else:
+			return  HttpResponse("fail")
 	except:
-	
 		return HttpResponse(template.render({}, request))
+		
+	
+
+
 	
 	
