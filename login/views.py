@@ -8,15 +8,23 @@ from django.urls import reverse
 
 def login(request):
 	template = loader.get_template("login/login.html")
+	
 	try:
 		username_field = request.POST['username']
 		password_field = request.POST['password']
 
 		user_auth = authenticate(username = username_field, password = password_field)
+		
 		if user_auth is not None:
-			return HttpResponse("success")
+			username = User.objects.get(username = username_field).username
+			return HttpResponseRedirect(reverse('asking:asking', args = (username, )))
+
 		else:
-			return  HttpResponse("fail")
+			message = "Log in fail (Wrong username or password)"
+			return  HttpResponse(template.render({
+				'message': message
+			}, request))
+
 	except:
 		return HttpResponse(template.render({}, request))
 		

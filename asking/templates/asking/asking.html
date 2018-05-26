@@ -1,0 +1,13 @@
+<h1>{{ first_name }} {{ last_name }}</h1>
+
+<p>@{{ username }}</p>
+
+<form action = "{% url 'asking:asking' username  %}" method = 'post'>
+    {% csrf_token %}
+
+    <label for = "content">Ask @{{ username }}: </label>
+    <input type = "text" name = "content" id = "content" value = ""/>
+    
+	<input type = "submit" value = "Send" />
+	
+</fomr>
