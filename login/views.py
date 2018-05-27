@@ -14,11 +14,11 @@ def login(request):
 		password_field = request.POST['password']
 
 		user_auth = authenticate(username = username_field, password = password_field)
-		
-		if user_auth is not None:
+
+		if (user_auth is not None) and (not User.objects.get(username = username_field).is_superuser):
 			username = User.objects.get(username = username_field).username
 			return HttpResponseRedirect(reverse('asking:asking', args = (username, )))
-
+			
 		else:
 			message = "Log in fail (Wrong username or password)"
 			return  HttpResponse(template.render({
@@ -29,6 +29,7 @@ def login(request):
 		return HttpResponse(template.render({}, request))
 		
 def signup(request):
+	
 	template_signup = loader.get_template('login/signup.html')
 	template_login = loader.get_template('login/login.html')
 	message = "Sign up success"
@@ -46,6 +47,7 @@ def signup(request):
 		return HttpResponse(template_login.render({
 			'message': message
 		}, request))
+
 	except:
 		return HttpResponse(template_signup.render({}, request))
 	

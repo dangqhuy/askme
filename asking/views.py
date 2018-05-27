@@ -9,6 +9,8 @@ from django.urls import reverse
 def ask(request, username):
     user = User.objects.get(username = username)
     template = loader.get_template('asking/asking.html')
+    if request.user.is_authenticated:
+        print ("check log in")
     try:
         content_field = request.POST['content']
 
