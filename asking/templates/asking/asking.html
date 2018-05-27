@@ -9,5 +9,18 @@
     <input type = "text" name = "content" id = "content" value = ""/>
     
 	<input type = "submit" value = "Send" />
-	
+    
+    {% if question %}
+
+    {% for q in question %}
+        <ul>
+            <li>{{ q.content }}</li>
+            
+            <br/><p> {{ q.answer }}</p>
+
+
+        </ul>
+    {% endfor %}
+
+    {% endif %}
 </fomr>
