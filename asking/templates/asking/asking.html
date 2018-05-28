@@ -2,25 +2,35 @@
 
 <p>@{{ username }}</p>
 
-<form action = "{% url 'asking:asking' username  %}" method = 'post'>
+<form action = "{% url 'asking:asking' username %}" method = 'post'>
     {% csrf_token %}
-
-    <label for = "content">Ask @{{ username }}: </label>
-    <input type = "text" name = "content" id = "content" value = ""/>
-    
-	<input type = "submit" value = "Send" />
-    
+    {% if not check_login %}
+        <label for = "content">Ask @{{ username }}: </label>
+        <input type = "text" name = "content" id = "content" value = ""/>
+        
+        <input type = "submit" value = "Send" />
+    {% endif %}
     {% if question %}
 
-    {% for q in question %}
-        <ul>
-            <li>{{ q.content }}</li>
-            
-            <br/><p> {{ q.answer }}</p>
+        {% for q in question %}
+            <ul>
+                <li>{{ q.content }}</li>
+                {% if not q.answer%}
+                    {% if check_login %}
+                        <input type = "text" name = "answer"  id = "answer" value = ""/>
+                        <input type="hidden" name="question_id" value="{{ q.id }}"/>
+                        <input type = "submit" value = "Send" />
+                    {% else %}
+                        <p>No answer</p>
+                    {% endif %}
 
+                {% else %}
+                    <p> {{ q.answer }}</p>
+                {% endif %}
 
-        </ul>
-    {% endfor %}
+            </ul>
+        {% endfor %}
 
-    {% endif %}
+{% endif %}
+
 </fomr>

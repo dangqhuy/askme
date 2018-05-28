@@ -1,23 +1,22 @@
 from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.models import User
 from django.urls import reverse
 
 
 def login(request):
 	template = loader.get_template("login/login.html")
-	
 	try:
 		username_field = request.POST['username']
 		password_field = request.POST['password']
-
+		
 		user_auth = authenticate(username = username_field, password = password_field)
 
-		if (user_auth is not None) and (not User.objects.get(username = username_field).is_superuser):
-			username = User.objects.get(username = username_field).username
-			return HttpResponseRedirect(reverse('asking:asking', args = (username, )))
+		if (user_auth is not None) and (not user_auth.is_superuser):
+			auth_login(request, user_auth)
+			return HttpResponseRedirect(reverse('asking:asking', args = (user_auth.username, )))
 			
 		else:
 			message = "Log in fail (Wrong username or password)"
