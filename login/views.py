@@ -1,13 +1,11 @@
 from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from django.contrib.auth import authenticate, login, logout as user_ahihi
+from django.contrib.auth import authenticate, login as user_ahihi
 from django.contrib.auth.models import User
 from django.urls import reverse
 
-def logout_view(request):
-    logout(request)
-    return render(request, 'authentication/login.html')
+
 def login1(request): 
 	template = loader.get_template("authentication/login.html")
 	try:	
@@ -46,7 +44,6 @@ def signup1(request):
 		user.first_name = firstname_field
 		user.last_name = lastaname_field
 		user.save()
-		#username = User.objects.get(username = username_field).username
 		message = "successful register, now, Plz sign in :3"
 		#return HttpResponseRedirect(reverse('question:index', args = (username, )))
 		return HttpResponse(template_login.render({'message': message}, request))

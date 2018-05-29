@@ -5,10 +5,15 @@
   <title>{% block title %}HOME{% endblock %}</title>
 </head>
 <body>
-	  
-	<h2> hello user: {{ request.user.username }}</h2>
-  
-	
+  {% if request.user and user.is_authenticated %}
+      
+     <h2> hello user: {{ request.user.username }}</h2>
+     <a href = "{% url 'authentication:logout' %}">log out!!!</a>
+  {% else %}
+    
+    <p>you are not logged in yet</p>
+    <a href="{% url 'authentication:login' %}"> login !!!</a>
+  {% endif %}
   <main>
     {% block content %}
     <h3> day la trang sau khi dang nhap thanh cong!! </h3>

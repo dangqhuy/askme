@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.template import loader
 from asking.models import Question
 from django.core.exceptions import ObjectDoesNotExist
-import datetime
+
 # Create your views here.
 
 def IndexView(request, username):
