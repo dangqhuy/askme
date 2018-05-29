@@ -12,11 +12,11 @@ def login(request):
 		username_field = request.POST['username']
 		password_field = request.POST['password']
 		
-		user_auth = authenticate(username = username_field, password = password_field)
+		user_auth = authenticate(request, username=username_field, password=password_field)
 
 		if (user_auth is not None) and (not user_auth.is_superuser):
 			auth_login(request, user_auth)
-			return HttpResponseRedirect(reverse('asking:asking', args = (user_auth.username, )))
+			return HttpResponseRedirect(reverse('asking:asking', args=(user_auth.username, )))
 			
 		else:
 			message = "Log in fail (Wrong username or password)"
@@ -26,6 +26,7 @@ def login(request):
 
 	except:
 		return HttpResponse(template.render({}, request))
+		
 		
 def signup(request):
 	
