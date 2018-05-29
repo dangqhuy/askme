@@ -2,10 +2,10 @@
 {% block title %}Login{% endblock %}
 {% block content %}
 
-		{% if check_login %}
+	{% if check_login %}
 			
-		{% endif %}
-		
+	{% endif %}
+	{% load static %}
 		<form action = "{% url 'question:index' username  %}" method = 'post'>
     		{% csrf_token %}
     		
@@ -17,32 +17,48 @@
 			<br />
 			<input type = "submit" value = "Ask" />
 			{% endif %}
-		
+        </form>
+        
+		<section id="three" class="wrapper style1">
+            <div class="container">
 			{% if question_list %}
-				<h2> Someone asked {{ username }} :3 </h2>
-		
+                <header class="major special">
+				    <h2> Someone asked {{ username }} :3 </h2>
+		        </header>
     			{% for q in question_list %}
-        			<ul>
-        				<li>From: {{ q.name_asker }} </li>
-          				<li>Question: {{ q.content }}</li>
-            				{% if not q.answer %}
-            					{% if check_login %}
-            					<input type="text" name="answer_" placeholder="Your answer">
-            					<input type="hidden" name="question_id" value="{{ q.id }}">
-            					<input type="submit" name="Answer">
+        			<div class="feature-grid">
+                        <div class="feature">
+                                <div class="image rounded"><img src="{% static 'images/pic01.jpg' %}" alt="" />
+                                </div>
+                                <div class="content">
+                                    <header>
+        				                <h4>Question: {{ q.content }} </h4>
+          				                <p>From: {{ q.name_asker }}</p>
+                                    </header>
+                    
+                                    <p>Time: {{ q.asking_day }} </p>
+            				        {% if not q.answer %}
+            					       {% if check_login %}
+            					           <input type="text" name="answer_" placeholder="Your answer">
+            					           <input type="hidden" name="question_id" value="{{ q.id }}">
+            					           <input type="submit" name="Answer">
             						
-            					{% endif%}
-            				{% else %}
-            					<p>  The answer: {{ q.answer }}</p>
-            				{% endif %}
-            	
-     
+            					       {% endif%} <!-- if check_login-->
+            				        {% else %}
+            					       <p>  The answer: {{ q.answer }}</p>
+            				        {% endif %} <!-- if answer-->
+            	               </div>
+                        </div>
 
-        			</ul>
+        			</div>
     			{% endfor %}
     	
     		{% else %}
-    			<p> {{ username }} don't have any question yet!</p>	
+    			<header class="major special">
+                    <p> {{ username }} don't have any question yet!</p>	
+                </header>
     		{% endif %}
-		</form>
+            </div>
+		
+        </section>
  {% endblock %}

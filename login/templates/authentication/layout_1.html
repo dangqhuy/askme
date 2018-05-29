@@ -1,10 +1,38 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static '/css/main.css' %}">
   <title>{% block title %}HOME{% endblock %}</title>
 </head>
-<body>
+<body class="landing">
+
+  <!-- Header -->
+  <header id="header" class="alt">
+        <h1><strong><a href="index.html">Spatial</a></strong> by Templated</h1>
+        <nav id="nav">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="generic.html">Generic</a></li>
+            <li><a href="elements.html">Elements</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+  <!-- Banner -->
+      <section id="banner">
+        <h2>Spatial</h2>
+        <p>Lorem ipsum dolor sit amet nullam consequat <br /> interdum vivamus donce sed libero.</p>
+        <ul class="actions">
+          <li><a href="#" class="button special big">Get Started</a></li>
+        </ul>
+      </section>
+
   {% if request.user and user.is_authenticated %}
       
      <h2> hello user: {{ request.user.username }}</h2>
@@ -14,10 +42,35 @@
     <p>you are not logged in yet</p>
     <a href="{% url 'authentication:login' %}"> login !!!</a>
   {% endif %}
-  <main>
+  
     {% block content %}
-    <h3> day la trang sau khi dang nhap thanh cong!! </h3>
+    
+
     {% endblock %}
-  </main>
+  
+  
+
+  <!-- Footer -->
+      <footer id="footer">
+        <div class="container">
+          <ul class="icons">
+            <li><a href="#" class="icon fa-facebook"></a></li>
+            <li><a href="#" class="icon fa-twitter"></a></li>
+            <li><a href="#" class="icon fa-instagram"></a></li>
+          </ul>
+          <ul class="copyright">
+            <li>&copy; Untitled</li>
+            <li>Design: <a href="http://templated.co">TEMPLATED</a></li>
+            <li>Images: <a href="http://unsplash.com">Unsplash</a></li>
+          </ul>
+        </div>
+      </footer>
+
+<p> ahihi</p>
+  <!-- Scripts -->
+      <script src="{% static '/js/jquery.min.js' %}"></script>
+      <script src="{% static '/js/skel.min.js' %}"></script>
+      <script src="{% static '/js/util.js' %}"></script>
+      <script src="{% static '/js/main.js' %}"></script>
 </body>
 </html>
