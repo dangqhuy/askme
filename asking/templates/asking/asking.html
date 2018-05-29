@@ -1,20 +1,20 @@
 <h1>{{ first_name }} {{ last_name }}</h1>
-<form action = "{% url 'asking:asking' username %}" method = "POST">
+<form action="{% url 'asking:asking' username %}" method="POST">
         {% csrf_token %}
         {% if check_login %}
-        <input type = "hidden" name = "check_logout"  id = "check_logout" value = "logout"/>
-        <input type = "submit" value = "Log out" />
+        <input type="hidden" name="check_logout" id="check_logout" value="logout"/>
+        <input type="submit" value="Log out" />
         {% endif %}
 </form>
 <p>@{{ username }}</p>
 
-<form action = "{% url 'asking:asking' username %}" method = 'post'>
+<form action="{% url 'asking:asking' username %}" method='post'>
     {% csrf_token %}
     {% if not check_login %}
-        <label for = "content">Ask @{{ username }}: </label>
-        <input type = "text" name = "content" id = "content" value = ""/>
+        <label for="content">Ask @{{ username }}: </label>
+        <input type="text" name="content" id="content" value=""/>
         
-        <input type = "submit" value = "Send" />
+        <input type="submit" value="Send" />
     {% endif %}
 </form>
 
@@ -25,13 +25,11 @@
                 <li>{{ q.content }}</li>
                 {% if not q.answer %}
                     {% if check_login %}
-                    
-                    
-                    <form action = "{% url 'asking:asking' username %}" method = 'post'>
+                    <form action="{% url 'asking:asking' username %}" method='post'>
                         {% csrf_token %}
-                        <input type = "text" name = "answer"  id = "answer" value = ""/>
-                        <input type = "hidden" name = "question_id"  id = "question_id" value = "{{ q.id }}"/>
-                        <input type = "submit" value = "Send" />
+                        <input type="text" name="answer" id="answer" value="">
+                        <input type="hidden" name="question_id" id="question_id" value="{{ q.id }}"/>
+                        <input type="submit" value="Send" />
                     </form>
                     {% else %}
                         <p>No answer</p>

@@ -6,7 +6,6 @@ from asking.models import Question
 from django.urls import reverse
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import logout as auth_logout
-# Create your views here.
 
 
 def ask(request, username):
@@ -19,13 +18,11 @@ def ask(request, username):
     else:
         check_login = False
 
-        
-
     if not check_login:
         try:
             content_field = request.POST['content']
-            user.questions.create(content= content_field, answer="")
-            return HttpResponseRedirect(reverse('asking:asking', args=(username, )))
+            user.questions.create(content=content_field, answer="")
+            return HttpResponseRedirect(reverse('asking:asking', args=(username,)))
 
         except BaseException:
             try:
