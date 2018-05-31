@@ -1,22 +1,7 @@
-<h1>LOGIN</h1>
-{% if message %}
-<p> {{message}} </p>
-{% endif %}
-<form action="{% url 'login:login' %}" method='post'>
-	{% csrf_token %}
-	<label for="username">Username: </label>
-	<input type="text" name="username" id="username" value=""/>
+{% extends "login/base1.html" %}
 
-	<label for="password"><br />Password: </label>
-	<input type="password" name="password" id="password" value=""/>
+{% block title %} Login {% endblock %}
 
-	<br /><input type="submit" value="Log in" />
+{% block content %}
 
-
-</form>
-
-
-<form action="{% url 'login:signup' %}" method='POST'>
-		{% csrf_token %}
-		<input type="submit" value="Sign Up" />
-</form>
+ {% endblock %}

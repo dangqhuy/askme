@@ -1,23 +1,11 @@
-<h1>SIGN UP</h1>
+{% extends "login/base2.html" %}
 
-<form action="{% url 'login:signup' %}" method='post'>
-    {% csrf_token %}
+{% block title %} Sign up {% endblock %}
 
-    <label for="email">Email: </label>
-    <input type="email" name="email" id="email" value=""/>
-    
-    <br /><label for="firstname">First name: </label>
-    <input type="text" name="firstname" id="firstname" value=""/>
-    
-    <br /><label for="lastname">Last name: </label>
-    <input type="text" name="lastname" id="lastname" value=""/>
+{% block content %}
 
-	<br /><label for="username">Username: </label>
-	<input type="text" name="username" id="username" value=""/>
+ {% endblock %}
 
-	<br /><label for="password"><br />Password: </label>
-	<input type="password" name="password" id="password" value=""/>
 
-	<br /><input type="submit" value="Sign up" />
-	
-</fomr>
+
+
