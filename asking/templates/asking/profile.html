@@ -1,0 +1,17 @@
+<h1>{{ first_name }} {{ last_name }}</h1>
+<p>@{{ username }}</p>
+{% for question in question_list %}
+<ul>
+    <li><p>{{ question }} <spam style="margin:20px; font-size:12px">Created at {{ question.created|timesince}}</spam></p></li> 
+    <form action="{% url 'asking:question' question.id %}" method="POST">
+        {% csrf_token %}
+        {% if not question.answer %}
+            <input type="text" name="answer" id="answer" value=""/>
+            <input type="hidden" name="question_id" id="question_id" value="{{ question.id }}"/>
+            <input type="submit" value="Sent"/>
+        {% else %}
+            {{ question.answer }}
+        {% endif %}
+    </form>
+</ul>
+{% endfor %}

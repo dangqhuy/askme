@@ -1,0 +1,17 @@
+<h1>LOGIN</h1>
+<form action="" method="POST">
+    {% csrf_token %}
+    <label for="username">Username:</label>
+    <input type="text" name="username" id="username" value=""/>
+    
+    <br /><label for="password">Password:</label>
+    <input type="password" name="password" id="password" value=""/>
+    
+    <br /><input type="submit" value="Log in"/>
+    
+</form>
+<form action="{% url 'myauth:signup' %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Sign up"/>
+</form>
+
