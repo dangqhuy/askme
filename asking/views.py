@@ -4,6 +4,7 @@ from django.urls import reverse, reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.models import User
 
+
 class AskView(CreateView):
     template_name = "asking/asking.html"
     model = Question

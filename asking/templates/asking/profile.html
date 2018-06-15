@@ -2,7 +2,7 @@
 <p>@{{ username }}</p>
 {% for question in question_list %}
 <ul>
-    <li><p>{{ question }} <spam style="margin:20px; font-size:12px">Created at {{ question.created|timesince}}</spam></p></li> 
+    <li><p>{{ question }} <spam style="margin:20px; font-size:12px">Someone asked at {{ question.created|timesince}}</spam></p></li> 
     <form action="{% url 'asking:question' question.id %}" method="POST">
         {% csrf_token %}
         {% if not question.answer %}
